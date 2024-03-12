@@ -1,5 +1,9 @@
 
-export const Words = {
+export interface WordList {
+    [key: string]: string[];
+}
+
+export const Words: WordList = {
     carro: ["Motor", "Porta", "Capô", "Pneu", "Antena"],
     fruta: ["Banana", "Maçã", "Pêra", "Mamão", "Laranja"],
     corpo: ["Braço", "Perna", "Cérebro", "Pescoço", "Olhos"],
