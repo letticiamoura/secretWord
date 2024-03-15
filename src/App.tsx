@@ -20,6 +20,11 @@ export default function App() {
 
   const [ wordsList ] = useState(Words);
 
+  const [ guessedLetters, setGuessedLetters ] = useState([]);
+  const [ wrongLetters, setWrongLetters ] = useState([]);
+  const [ guesses, setGuesses ] = useState(3);
+  const [ score, setScore ] = useState(0);
+
   const [ pickedWord, setPickedWord] = useState("");
   const [ pickedCategory, setPickedCategory ] = useState("");
   const [letters, setLetters ] = useState([]);
@@ -66,7 +71,16 @@ export default function App() {
 
     <div className="flex justify-center items-center text-center text-white">
       {gameStage === 'start' && <StartScreen startGame={startGame}/>}
-      {gameStage === 'game' && <Game verifyLetter={verifyLetter} />}
+      {gameStage === 'game' && <Game 
+                                verifyLetter={verifyLetter} 
+                                pickedWord={pickedWord} 
+                                pickedCategory={pickedCategory} 
+                                letters={letters}
+                                guessedLetters={guessedLetters}
+                                wrongLetters={wrongLetters}
+                                guesses={guesses}
+                                score={score}
+                                />}
       {gameStage === 'end' && <GameOver retry={retry}/>}
     </div>
 
