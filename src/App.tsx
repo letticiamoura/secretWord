@@ -59,8 +59,8 @@ export default function App() {
     setGameStage(stages[1].name);
   }
 
-  const verifyLetter = () => {
-    setGameStage(stages[2].name)
+  const verifyLetter = (letter: string) => {
+    console.log(letter)
   }
 
   const retry = () => {

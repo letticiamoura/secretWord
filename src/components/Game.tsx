@@ -1,3 +1,4 @@
+import { useRef, useState } from "react";
 import Button from "../layout/Button";
 
 export default function Game( {verifyLetter, 
@@ -9,6 +10,16 @@ export default function Game( {verifyLetter,
                               guesses,
                               score
                             }:any ) {
+
+    const [ letter, setLetter ] = useState("");
+    const  letterInputRef = useRef<HTMLInputElement | null>(null);
+
+    const handleSubmit = (e: any) => {
+        e.preventDefault()
+        verifyLetter(letter)
+        setLetter("");
+        letterInputRef.current?.focus();
+    }
     
     return(
         <div className="game p-5 h-full w-full bg-indigo-950">
@@ -36,9 +47,9 @@ export default function Game( {verifyLetter,
             <div className="p-5">
                 <p className="mb-[1.2em]">Tente adivinhar a letra da palavra</p>
 
-                <form className="flex justify-center items-center">
+                <form onSubmit={handleSubmit} className="flex justify-center items-center">
                     <input className="text-4xl text-center h-[50px] uppercase
-                     w-[50px] mr-10 text-black" type="text" name="letter" maxLength={1} required />
+                     w-[50px] mr-10 text-black" onChange={(e) => setLetter(e.target.value)} ref={letterInputRef} value={letter} type="text" name="letter" maxLength={1} required />
                     <Button onClick={verifyLetter} title="Jogar"/>
                 </form>
             </div>
