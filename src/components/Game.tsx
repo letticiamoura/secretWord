@@ -2,7 +2,6 @@ import { useRef, useState } from "react";
 
 interface GameProps {
     verifyLetter: (letter: string) => void,
-    pickedWord: string,
     pickedCategory: string,
     letters: string[],
     guessedLetters: string[],
@@ -13,7 +12,6 @@ interface GameProps {
 
 export default function Game({
     verifyLetter, 
-    pickedWord, 
     pickedCategory, 
     letters,
     guessedLetters,
@@ -21,8 +19,6 @@ export default function Game({
     guesses,
     score,
 }: GameProps ) {
-
-    console.log(pickedWord);
 
     const [ letter, setLetter ] = useState("");
 

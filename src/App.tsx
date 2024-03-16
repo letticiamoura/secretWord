@@ -17,17 +17,33 @@ const stages = [
 const guessesQty = 3;
 
 function App() {
-
+  //Estagio dos jogos
   const [ gameStage, setGameStage ] = useState(stages[0].name);
+
+  //Array de palavras
   const [ wordsList ] = useState(Words);
 
+  //Palavra
   const [ pickedWord, setPickedWord] = useState("");
+
+  console.log("pickedWord: " + pickedWord)
+
+  //Categoria
   const [ pickedCategory, setPickedCategory ] = useState("");
+
+  //Letra a Letra
   const [ letters, setLetters ] = useState([""]);
 
+  //Letras usadas
   const [ guessedLetters, setGuessedLetters ] = useState([""]);
+
+  //Letras erradas
   const [ wrongLetters, setWrongLetters ] = useState([""]);
+
+  //Quantidade de Tentativas
   const [ guesses, setGuesses ] = useState(guessesQty);
+
+  //Pontuação
   const [ score, setScore ] = useState(0);
 
   const pickedWordAndCategory = useCallback(() => {
@@ -42,22 +58,26 @@ function App() {
     
   }, [wordsList])
 
-  //Start the secret word game
+  //Iniciando o jogo
   const startGame = useCallback(() => {
-    //Pick word and pick category
+    //Escolhendo a palavra e a categoria
     const {word, category} = pickedWordAndCategory();
 
+    //Limpando as palavras
     clearLettersStates();
-    //create an array of latters
+
+    //Criando array de letras
     let wordLetters = word.split("");
     wordLetters = wordLetters.map((l) => l.toLowerCase());
 
-    //fill states
+    //Preenchendo estados
     setPickedWord(word);
     setPickedCategory(category);
     setLetters(wordLetters);
 
+    //Iniciando jogo no stages 1
     setGameStage(stages[1].name);
+
   }, [pickedWordAndCategory]);
   
   const verifyLetter = (letter: string) => {
@@ -83,15 +103,18 @@ function App() {
       setGuesses((actualGuesses) => actualGuesses - 1)
     }
   }
-const retry = () => {
-  setScore(0);
-  setGuesses(guessesQty);
-  setGameStage(stages[0].name);
+
+  const retry = () => {
+    setScore(0);
+    setGuesses(guessesQty);
+    setGameStage(stages[0].name);
 }
-const clearLettersStates = () => {
-  setGuessedLetters([])
-  setWrongLetters([])
-}
+
+  const clearLettersStates = () => {
+    setGuessedLetters([])
+    setWrongLetters([])
+  }
+  
   useEffect(() => {
     if(guesses <= 0) {
 
@@ -104,7 +127,7 @@ const clearLettersStates = () => {
   useEffect(() => {
     //Array de letras unicas
     const uniqueLetters = [...new Set(letters)]
-    if(guessedLetters.length === uniqueLetters.length) {
+    if(guessedLetters.length === uniqueLetters.length && gameStage === stages[1].name) {
       setScore((actualScore) => (actualScore += 50))
       startGame()
     }
@@ -115,8 +138,7 @@ const clearLettersStates = () => {
     <div className="flex justify-center items-center text-center text-white">
       {gameStage === 'start' && <StartScreen startGame={startGame}/>}
       {gameStage === 'game' && <Game 
-                                verifyLetter={verifyLetter} 
-                                pickedWord={pickedWord} 
+                                verifyLetter={verifyLetter}
                                 pickedCategory={pickedCategory} 
                                 letters={letters}
                                 guessedLetters={guessedLetters}
