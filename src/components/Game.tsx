@@ -44,10 +44,10 @@ export default function Game({
             <p>Você tem {guesses} tentavivas</p>
 
 
-            <div className="flex items-center md:ml-44 md:w-[70vw] justify-center p-3 h-40 border-[15px] border-amber-400">
+            <div className="flex items-center md:ml-44 w-auto md:w-[70vw] justify-center p-3 h-40 border-[15px] border-amber-400">
                 {letters.map((letter, i) =>
                 guessedLetters.includes(letter) ? (
-            <span className="border-4 h-[20vh] w-[100px] text-black bg-white/90 text-6xl text-center p-3 uppercase border-yellow-400 font-bold" key={i}>
+            <span className="border-4 h-[20vh] w-[100px] text-black bg-white/90 text-3xl md:text-6xl text-center p-3 uppercase border-yellow-400 font-bold" key={i}>
               {letter}
             </span>
           ) : (
