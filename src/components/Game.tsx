@@ -44,14 +44,14 @@ export default function Game({
             <p>Você tem {guesses} tentavivas</p>
 
 
-            <div className="flex items-center md:ml-44 w-auto md:w-[70vw] justify-center p-3 h-40 border-[15px] border-amber-400">
+            <div className="flex flex-wrap items-center md:ml-44 w-auto md:w-[70vw] justify-center p-3 h-auto md::h-40 border-[15px] border-amber-400">
                 {letters.map((letter, i) =>
                 guessedLetters.includes(letter) ? (
-            <span className="border-4 h-[20vh] w-[100px] text-black bg-white/90 text-3xl md:text-6xl text-center p-3 uppercase border-yellow-400 font-bold" key={i}>
+            <span className="border-4 h-[10vh] md:h-[20vh] w-[100px] text-black bg-white/90 text-3xl md:text-6xl text-center p-3 uppercase border-yellow-400 font-bold" key={i}>
               {letter}
             </span>
           ) : (
-            <span key={i} className="border-4 p-3 h-[20vh] w-[100px] text-6xl text-black font-bold
+            <span key={i} className="border-4 p-3 h-[10vh] md:h-[20vh] w-[100px] text-6xl text-black font-bold
             + bg-white/90 uppercase border-amber-500"></span>
           )
         )}
